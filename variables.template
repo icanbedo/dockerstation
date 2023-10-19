@@ -1,0 +1,29 @@
+# Terraform Variables
+# Customize parameters in this file specific to your deployment.
+
+username = ""
+
+ip = ""
+
+certCommonName = ""
+
+certSANNames = [""]
+
+emailAddress = ""
+
+cloudFlareAPIToken = ""
+
+CertificatePath = ""
+
+CertificateName = ""
+
+Staging = false
+
+public_key = ""
+
+homedir = ""
+
+#PortainerImage = "portainer/portainer-ee:latest"
+#PortainerImage = "portainer/portainer-ce:latest"
+
+ContainerPath = ""

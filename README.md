@@ -74,6 +74,10 @@ LetsEncrypt can be reused for other certificates by using the following process:
 
 > terraform apply dockerstation.out -state dockerstation.tfstate
 
+or
+
+> terraform apply -var-file dockerstation.tfvars-state dockerstation.tfstate
+
 to destroy:
 > terraform destroy -state dockerstation.tfstate
 

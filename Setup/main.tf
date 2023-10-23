@@ -19,13 +19,21 @@ provisioner "remote-exec" {
     "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg",
     "sudo chmod a+r /etc/apt/keyrings/docker.gpg",
     "echo \"deb [arch=\"$(dpkg --print-architecture)\" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \"$(. /etc/os-release && echo \"$VERSION_CODENAME\")\" stable\" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null",
-    "sudo apt-get update && sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y",
+    "sudo apt-get update && sudo apt-get install nfs-common docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y",
     "sudo groupadd docker",
     "sudo usermod -aG docker ${var.username}",
     "newgrp docker",
     "docker version",
     "sudo systemctl enable docker.service",
     "sudo systemctl enable containerd.service",
+    "sudo systemctl add-wants default.target rpc-statd.service",
+    "sudo systemctl enable rpc-statd",
+    "sudo systemctl start rpc-statd",
+    "sudo systemctl stop ufw",
+    "sudo systemctl disable ufw",
+    "sudo systemctl mask --now ufw",
+    "sudo timedatectl set-ntp yes",
+
     "rm -rf ${var.homedir}/*",
     "echo ${var.password} | sudo -S systemctl restart ssh"
     ]

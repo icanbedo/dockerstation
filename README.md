@@ -70,13 +70,13 @@ LetsEncrypt can be reused for other certificates by using the following process:
 ```
 > terraform init
 
-> terraform plan -out dockerstation.out -var-file dockerstation.tfvars -state dockerstation.tfstate
+> terraform plan -out dockerstation.out -var-file <path>dockerstation.tfvars -state dockerstation.tfstate
 
-> terraform apply dockerstation.out -state dockerstation.tfstate
+> terraform apply dockerstation.out -state <path>dockerstation.tfstate
 
 or
 
-> terraform apply -var-file dockerstation.tfvars-state dockerstation.tfstate
+> terraform apply -var-file <path>dockerstation.tfvars-state dockerstation.tfstate
 
 to destroy:
 > terraform destroy -state dockerstation.tfstate
@@ -88,6 +88,21 @@ to delete all resources
 
 ```
 terraform destroy
+```
+
+## Certificate renew
+
+tl;dr do this:
+
+renew, then destroy and recreate portainer (portainer do something stupids)
+
+```
+letsencrypt> terraform apply -out dockerstation.out -var-file <path>dockerstation.tfvars -state dockerstation.tfstate
+
+portainer> terraform destroy -var-file <path>dockerstation.tfvars 
+
+portainer> terraform apply -var-file <path>dockerstation.tfvars 
+
 ```
 
 ## Whats next?

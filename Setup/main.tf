@@ -22,6 +22,9 @@ provisioner "remote-exec" {
     "sudo apt-get update && sudo apt-get install nfs-common docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y",
     "sudo groupadd docker",
     "sudo usermod -aG docker ${var.username}",
+    "sudo useradd -u 1024 admin",
+    "sudo usermod -g users admin",
+    "echo ${var.password} | sudo -S passwd admin",
     "newgrp docker",
     "docker version",
     "sudo systemctl enable docker.service",
@@ -33,7 +36,7 @@ provisioner "remote-exec" {
     "sudo systemctl disable ufw",
     "sudo systemctl mask --now ufw",
     "sudo timedatectl set-ntp yes",
-
+    "sudo timedatectl set-timezone Australia/Sydney",
     "rm -rf ${var.homedir}/*",
     "echo ${var.password} | sudo -S systemctl restart ssh"
     ]

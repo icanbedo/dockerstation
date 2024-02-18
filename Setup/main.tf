@@ -38,7 +38,10 @@ provisioner "remote-exec" {
     "sudo timedatectl set-ntp yes",
     "sudo timedatectl set-timezone Australia/Sydney",
     "rm -rf ${var.homedir}/*",
-    "echo ${var.password} | sudo -S systemctl restart ssh"
+    "echo ${var.password} | sudo -S systemctl restart ssh",
+    #fix DNS
+    "sudo sed -i 's/#DNS=/DNS=${var.dns_server}/g' /etc/systemd/resolved.conf",
+    "sudo systemctl restart systemd-resolved"
     ]
 }
 

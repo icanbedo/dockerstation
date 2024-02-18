@@ -7,6 +7,11 @@ variable "username" {
   type        = string
 }
 
+variable "dns_server" {
+  description = "DNS Server"
+  type        = string
+}
+
 variable "password" {
   description = "Host user password"
   type        = string

@@ -40,6 +40,7 @@ provisioner "remote-exec" {
      #fix DNS
     "echo ${nonsensitive(var.password)} | sudo -S sed -i 's/#DNS=/DNS=${var.dns_server}/g' /etc/systemd/resolved.conf",
     "echo ${nonsensitive(var.password)} | sudo -S systemctl restart systemd-resolved",
+    "echo ${nonsensitive(var.password)} | sudo -S mkdir /data",
     "rm -rf ${var.homedir}/*",
     "echo ${nonsensitive(var.password)} | sudo -S reboot",
     

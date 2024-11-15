@@ -96,8 +96,13 @@ tl;dr do this:
 
 renew, then destroy and recreate portainer (portainer do something stupids)
 
+
 ```
-letsencrypt> terraform apply -out dockerstation.out -var-file <path>dockerstation.tfvars -state dockerstation.tfstate
+letsencrypt> terraform plan -out dockerstation.out -var-file <path>dockerstation.tfvars -state dockerstation.tfstate
+letsencrypt> terraform apply -state dockerstation.tfstate dockerstation.out
+
+letsencrypt> terraform plan -out homeassistant.out -var-file <path>homeassistant.tfvars -state homeassistant.tfstate
+letsencrypt> terraform apply -state homeassistant.tfstate homeassistant.out
 
 portainer> terraform destroy -var-file <path>dockerstation.tfvars 
 
